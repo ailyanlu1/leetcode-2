@@ -1,0 +1,25 @@
+#include <cstdio>
+#include <iostream>
+
+using namespace std;
+class Solution {
+public:
+    int findComplement(int num) {
+        int complement = ~num;
+        unsigned int mask = 0x80000000;
+        
+
+        while((complement & mask) !=0){
+            mask>>=1;
+        }
+        int result = 0;
+
+        while(mask != 0){
+            result+=complement & mask;
+            mask>>=1;
+        }
+        return result;
+    }
+};
+//巨坑:mask若不用无符号整数，右移运算采用的是带符号右移
+//难点:考查位运算，主要是移位运算，mask的设计，按位取反运算符~

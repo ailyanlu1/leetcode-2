@@ -1,0 +1,20 @@
+vector<int> getRow(int rowIndex) {
+        vector<int> last;
+        int rowNumber = rowIndex+1;
+        for(int i=0;i<rowNumber;i++){
+            vector<int> now;
+            for(int j=0;j<i+1;j++){
+                if(j==0 || j==i){
+                    now.push_back(1);
+                }else{
+                    now.push_back(last[j]+last[j-1]);
+                }
+            }
+            last=now;
+            if(i==rowNumber-1){
+                return now;
+            }
+        }
+    }
+	
+这题跟118很像，但是这题采用rowIndex而上题是rowNumber，要进行一个+1的转换

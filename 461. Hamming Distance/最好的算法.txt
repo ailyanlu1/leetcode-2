@@ -1,0 +1,49 @@
+//python code:做异或，数1的个数
+def hammingDistance(self, x, y):
+	return bin(x^y).count('1')
+	
+//c++ code
+int hammingDistance(int x, int y) {
+        int dist = 0, n = x ^ y;
+        while (n) {
+            ++dist;
+            n &= n - 1;
+        }
+    return dist;
+}
+
+
+c++ code解释：
+So the while works by turning off the right most bit in n in each iteration, the details are as follows.
+the "while(n)" par is equivalent to while there is a bit set go into the loop
+when were in the loop the "++dist" just counts how may bits we have turned off(set to 0) so far
+the "n &= n-1" turns off(set to 0) the right most 1 bit, you can see this by just trying a few examples.
+so where we exit the loop we know that n must be zero and hence dist will contain the number of bits set to one in x^y.
+That's how the loop works.
+	
+跟python代码相比，本质上是多了如何计算一个二进制数中1的个数的实现问题
+while (n) {
+    ++dist;
+    n &= n - 1;
+}
+这个while循环便很好地完成了这个工作
+以计算0101中1的个数为例
+0101 &= 0100 得到 0100
+0100 &= 0011 得到 0000
+于是1的个数为2
+
+该算法的巧妙之处在于，有几个1，循环就进行几次
+http://www.cnblogs.com/grenet/archive/2011/06/10/2077228.html
+但是，部分擅长机组的人士并不赞成这种做法，而是赞成直接移位比较的方法。(我认为，在实际工作中，编译器能够处理这部分优化,所以保证代码的美观性是第一位的)
+因此，我将c++ code更正为
+
+int hammingDistance(int x, int y) {
+    int sum = 0, n = x ^ y;
+    while (n > 0) {
+        if((n & 0x1) !=0){
+            ++sum;
+        }
+        n>>=1;
+    }
+    return sum;
+}

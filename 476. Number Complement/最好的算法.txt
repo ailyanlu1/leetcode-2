@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        unsigned mask = ~0;
+        while (num & mask) mask <<= 1;
+        return ~mask & ~num;
+    }
+};
+
+num          = 00000101
+mask         = 11111000
+~mask & ~num = 00000010
+
+//左移运算一定用0补齐

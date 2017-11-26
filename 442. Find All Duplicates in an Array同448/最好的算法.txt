@@ -1,0 +1,39 @@
+vector<int> findDuplicates(vector<int>& nums) {
+        vector<int> res;
+        int i = 0;
+        while (i < nums.size()) {
+            if (nums[i] != nums[nums[i]-1]){
+				swap(nums[i], nums[nums[i]-1]);
+			} 
+            else {
+				i++;
+			}
+			
+        }
+        for (i = 0; i < nums.size(); i++) {
+            if (nums[i] != i + 1) {
+				res.push_back(nums[i])
+			};
+        }
+        return res;
+    }
+	
+对于 1 ≤ a[i] ≤ n (n = size of array)的特殊数组，有特殊的排序方法。排序结束后，所有a[i]=i+1的数都会移到正确的位置上，a[i]!=i+1的位置就是缺失的数(重复出现的数)。
+
+
+
+有个更加优化的算法(应采取下面的方法):只做标记不移动
+
+ vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int len = nums.size();
+        for(int i=0; i<len; i++) {
+            int m = abs(nums[i])-1; // index start from 0
+            nums[m] = nums[m]>0 ? -nums[m] : nums[m];
+        }
+        vector<int> res;
+        for(int i = 0; i<len; i++) {
+            if(nums[i] > 0) res.push_back(i+1);
+        }
+        return res;
+    }
+	

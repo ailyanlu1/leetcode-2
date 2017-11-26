@@ -1,0 +1,55 @@
+#include <cstdio>
+#include <iostream>
+#include <map>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+class Solution {
+public:
+    char charset[200]={0};
+    int  charset_length=0;
+    map<string,string> m;
+    Solution(){
+
+        for(char i = 'a'; i<'z';i++){
+            charset[charset_length++] = i;
+        }
+        for(char i = 'A'; i<'Z';i++){
+            charset[charset_length++] = i;
+        }
+    }
+
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+
+        string url_append = "http://tinyurl.com/";
+
+        srand((unsigned)time(NULL));
+        for(int i=1;i<=6;i++){
+            url_append+=charset[rand()%charset_length];
+        }
+        m.insert(map<string,string>::value_type(url_append,longUrl));
+        return url_append;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        map<string,string>::iterator it = m.find(shortUrl);
+        return (*it).second;
+    }
+};
+
+// Your Solution object will be instantiated and called as such:
+// Solution solution;
+// solution.decode(solution.encode(url));
+
+int main(){
+    Solution solution;
+    cout << solution.decode(solution.encode("https://leetcode.com/problems/design-tinyurl"));
+
+    return 0;
+}
+
+//难点:c++生成随机字符串：手动构造字符集，用随机数对字符串长度取模，重复n次得到随机字符串。
+//难点:map的使用

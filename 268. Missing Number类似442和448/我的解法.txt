@@ -1,0 +1,24 @@
+int missingNumber(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++){
+            int m;
+            if(abs(nums[i])==nums.size()+2){
+                m=0;
+            }else{
+                m=abs(nums[i]);
+            }
+            if(m==nums.size()){
+                continue;
+            }
+            if(nums[m]>0){
+                nums[m]=-nums[m];
+            }else if(nums[m]==0){
+                nums[m]=-(nums.size()+2);
+            }
+        }
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>=0){
+                return i;
+            }
+        }
+        return nums.size();
+    }

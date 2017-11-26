@@ -1,0 +1,21 @@
+vector<vector<int> > generate(int numRows) {
+        vector<vector<int> > r;
+        for(int i=0;i<numRows;i++){
+            vector<int> c;
+            for(int j=0;j<i+1;j++){
+                if(j==0 || j==i){
+                    c.push_back(1);
+                }else{
+                    c.push_back(r[i-1][j]+r[i-1][j-1]);
+                }
+
+            }
+            r.push_back(c);
+        }
+        return r;
+    }
+	
+	杨辉三角
+	一开始想不到应该要逐行推导，以为是用组合数公式进行计算，但听说组合数计算阶乘容易溢出，所以采用逐行推导
+	算法都差不多，只是要处理好首尾的1
+	我的代码不够简洁，有更简洁的二维数组的写法

@@ -1,0 +1,26 @@
+bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int last=-0x3f3f3f3f;
+        for(int i=0;i<nums.size();i++){
+            if(last==nums[i]){
+                return true;
+            }
+            last=nums[i];
+        }
+        return false;
+    }
+	
+学习了c++中快速排序的写法
+http://blog.csdn.net/zzzmmmkkk/article/details/4266888/
+
+
+
+第三个参数如果不传，默认升序
+升序：sort(begin,end,less<data-type>());
+降序：sort(begin,end,greater<data-type>());
+
+sort函数需要：
+#include <algorithm>
+
+less和greater函数需要
+#include <functional>

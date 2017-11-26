@@ -1,0 +1,15 @@
+int removeElement(vector<int>& nums, int val) {
+
+	for(vector<int>::iterator it = nums.begin();it!=nums.end();){
+		if((*it) == val){
+			it=nums.erase(it);
+		}else{
+			it++;
+		}
+	}
+	return nums.size();
+}
+
+
+坑：vector中erase的使用。
+erase之后，it有可能变成野指针。erase函数的返回值是下一个it，所以应使用上述写法。

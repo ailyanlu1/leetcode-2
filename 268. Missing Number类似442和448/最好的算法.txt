@@ -1,0 +1,16 @@
+使用位运算
+because x^x equal to 0,this solution is make a xor among these 2n+1 numbers (if there not lose one number there should be 2n+2 numbers and each one has its duplicate one ) , the unique one is the answer
+
+int missingNumber(vector<int>& nums) {
+	int result = nums.size();
+
+	for(int i=0;i<nums.size();i++){
+		result ^= nums[i];
+		result ^= i;
+	}
+	
+	return result;
+}
+
+
+也有其他方法：as the nums from 0 ~n ,so the total = (n+1)*n/2 ,the result = total - nums[i] (i from 0~n-2)
