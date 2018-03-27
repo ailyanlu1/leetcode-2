@@ -1,0 +1,70 @@
+import java.util.*;
+
+public class Main {
+    private static double arv_a, arv_b;
+    private static int sum_a=0, sum_b=0, count=0;
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int m = in.nextInt();
+        Set<Integer> a = new HashSet<>();
+        Set<Integer> b = new HashSet<>();
+
+        for(int i = 0; i < n; i++){
+            int input = in.nextInt();
+            a.add(input);
+        }
+        for(int i = 0; i < m; i++){
+            int input = in.nextInt();
+            b.add(input);
+        }
+
+
+        Boolean flag = true;
+
+        while (flag) {
+            for (Integer i : a) {
+                sum_a += i;
+            }
+
+            for (Integer i : b) {
+                sum_b += i;
+            }
+
+            arv_a = (double) sum_a / n;
+            arv_b = (double) sum_b / m;
+
+
+            if(move(a, b) || move(b, a)){
+                flag = true;
+            }else{
+                flag = false;
+            }
+//            if (arv_a > arv_b) {
+//                flag = move(a, b);
+//            } else {
+//                flag = move(b, a);
+//            }
+
+        }
+        System.out.println(count);
+
+    }
+
+
+    private static Boolean move(Set<Integer> s, Set<Integer> d){
+        Boolean flag = false;
+        for(Integer i:s){
+            if(i<arv_a && i>arv_b){
+                s.remove(i);
+                d.add(i);
+                count++;
+                flag=true;
+            }
+        }
+        return flag;
+    }
+
+
+}

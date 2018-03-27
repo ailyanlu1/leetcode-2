@@ -1,0 +1,47 @@
+
+
+public class Main {
+    public static void main(String[] args){
+        int ans = 0;
+        int []a = new int[]{5, 4, 2, 3, 1, 5};
+        int []dp = new int[a.length];
+        for(int i=0;i<a.length;i++)
+        {
+            dp[i]=1;
+            for(int j=0;j<i;j++)
+            {
+                if (a[j]<a[i])
+                {
+                    dp[i]=Math.max(dp[i],dp[j]+1);
+                }
+                ans=Math.max(ans, dp[i]);
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+每日一题之最长上升子序列
+http://blog.csdn.net/u011077606/article/details/43086099
+
+解法:动态规划
+这个问题是被称为最长子序列。可以通过DP的方法来求解。
+定义dp[i]为以ai为末尾的最长上升子序列的长度。以ai为结尾的上升子序列有两种情况
+1，只包含，ai
+2，包含一个以aj为结尾的上升子序列，再追加上 ai，其中 aj<ai。
+所以可以写出递推关系：
+dp[i]=max{1,dp[j]+1 | j<i 且 aj<ai}
+通过该方法的时间复杂度为 O(n^2).
+
+
+
+
+
+解法二  时间复杂度(NlogN)(待研究)：
+http://blog.csdn.net/ctsas/article/details/53675301
+http://blog.csdn.net/wy19910326/article/details/7229350
+
+除了算法一的定义之外（p【i】相当于算法一中的arr【i】），增加一个数组b，b[i]用以表示长度为i最长子序列的最后一个数最小可以是多少。易证：i<j时，b[i]<b[j]。
+在二分查找时，一直更新b[]内容，设此时b的总长度为k，
+若1. arr[i] >= b[k], 则b[k+1] = arr[i];
+若2. arr[i] <  b[k], 则在b[1..k]中用二分搜索大于arr[i]的最小值，返回其位置pos，然后更新b[pos]=arr[i]。
