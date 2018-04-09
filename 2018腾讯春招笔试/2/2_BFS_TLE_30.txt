@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int k = in.nextInt();
+        int a = in.nextInt();
+        int x = in.nextInt();
+        int b = in.nextInt();
+        int y = in.nextInt();
+        Queue<Node> q = new LinkedList<>();
+        int count = 0;
+
+        for (int i = 0; i < x; i++) {
+            q.offer(new Node(1, a));
+        }
+        for (int i = 0; i < y; i++) {
+            q.offer(new Node(1, b));
+        }
+
+        while (!q.isEmpty()) {
+            Node n = q.poll();
+            if (n.len == k) {
+                count++;
+            }
+            if (n.lv <= x + y) {
+                if (a + n.len <= k) {
+                    for (int i = 0; i < x; i++) {
+                        q.offer(new Node(n.lv + 1, a + n.len));
+                    }
+                }
+                if (b + n.len <= k) {
+                    for (int i = 0; i < y; i++) {
+                        q.offer(new Node(n.lv + 1, b + n.len));
+                    }
+                }
+            }
+        }
+        System.out.println(count / 2 % 1000000007);
+    }
+
+    static class Node {
+        Node(int lv, int len) {
+            this.lv = lv;
+            this.len = len;
+        }
+
+        int lv;
+        int len;
+    }
+
+}

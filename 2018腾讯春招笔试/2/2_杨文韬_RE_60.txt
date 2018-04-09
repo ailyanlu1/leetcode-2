@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static int A(int up, int bellow) {
+        int result = 1;
+        for (int i = up; i > 0; i--) {
+            result *= bellow;
+            bellow--;
+        }
+        return result;
+    }
+
+    public static int C(int up, int below) {
+        int half = below / 2;
+        if (up > half) {
+            up = below - up;
+        }
+        int denominator = A(up, up);
+
+        int numerator = A(up, below);
+        return numerator / denominator;
+
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt(),
+                a = scanner.nextInt(),
+                x = scanner.nextInt(),
+                b = scanner.nextInt(),
+                y = scanner.nextInt();
+
+        int numA = 0, numB, result = 0;
+        while(numA <= x) {
+            if((k - numA * a) % b == 0 && (numB = (k - numA * a) / b) <= y) {
+                if(numB < 0) break;
+                result += (C(numA, x) * C(numB, y)) % 1000000007;
+                result %= 1000000007;
+            }
+            numA++;
+        }
+        System.out.println(result);
+    }
+}

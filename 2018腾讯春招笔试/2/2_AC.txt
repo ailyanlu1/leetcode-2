@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static long mod = 1000000007;
+    static long[] fac = new long[105];//阶乘
+    static long[] inv = new long[105];//与阶乘倒数同余的数inv[x]%mod==(1/x!)%mod
+	//使用费马小定理
+
+	//组合数
+    public static long C(long n, long m) {
+        return fac[(int) n] * inv[(int) m] % mod * inv[(int) (n - m)] % mod;
+    }
+
+
+	//快速幂
+    public static long qpow(long a, long n) {
+        long ret = 1;
+        while (n > 0) {
+            if ((n & 1) > 0) ret = ret * a % mod;
+            a = a * a % mod;
+            n >>= 1;
+        }
+        return ret;
+    }
+
+
+    public static void init() {
+        fac[0] = 1;
+        for (int i = 1; i <= 100; i++) {
+            fac[i] = fac[i - 1] * i % mod;
+        }
+        inv[100] = qpow(fac[100], mod - 2);
+        for (int i = 99; i >= 0; i--) {
+            inv[i] = inv[i + 1] * (i + 1) % mod;
+        }
+    }
+
+    public static void main(String[] args) {
+        init();
+        Scanner scanner = new Scanner(System.in);
+
+        long K = scanner.nextInt(),
+                A = scanner.nextInt(),
+                X = scanner.nextInt(),
+                B = scanner.nextInt(),
+                Y = scanner.nextInt();
+        long ans = 0;
+
+        for (int i = 0; i <= X && A * i <= K; i++) {
+            long left = K - A * i;
+            if ((left % B)>0) continue;
+            long numB = left / B;
+            if (numB > Y) continue;
+            ans = (ans + C(X, i) * C(Y, numB) % mod) % mod;
+        }
+
+        System.out.println(ans);
+    }
+
+
+}

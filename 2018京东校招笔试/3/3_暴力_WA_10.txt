@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        a:
+        for(int i = 0 ;i<t;i++){
+            long n = in.nextLong();
+            long max = 9223372036854775807L;
+            long y = 2;
+            for(;y<max && n%y==0;y+=2){
+                long x = n / y;
+                if(x%2!=0){
+                    System.out.printf("%d %d\n",x,y);
+                    continue a;
+                }
+            }
+            System.out.println("No");
+        }
+
+    }
+}

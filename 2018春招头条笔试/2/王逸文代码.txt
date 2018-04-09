@@ -1,0 +1,49 @@
+#include<iostream>
+using namespace std;
+int ifGcd(int n)//是素数返回 1 
+{
+
+	for(int i=(n+1)/2;i>1;i--)
+	    if(n%i==0)
+	    return 0;
+    return 1;
+}
+
+int getNum(int n)
+{
+	int num = 0;
+	int max;
+	int min;
+	if(n>3)
+	{
+	
+	if(ifGcd(n))
+	{
+		return n-1;
+	}
+	else
+	{
+		for(int i=(n+1)/2;i>1;i--)
+		{
+			if(n%i==0)
+			{
+				max = i;
+				min = n/i;
+				num+=getNum(max);
+				num+=getNum(min);
+				return num;
+			}
+		}
+	}
+    }
+    else
+    return n-1;
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	cout<<getNum(n); 
+	return 0;
+}

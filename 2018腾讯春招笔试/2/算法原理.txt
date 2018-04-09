@@ -1,0 +1,14 @@
+[C/C++] 快速幂讲解
+https://www.cnblogs.com/lca1826/p/6748372.html
+
+费马小定理
+https://baike.baidu.com/item/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86/4776158?fr=aladdin
+
+逆元详解
+https://blog.csdn.net/acdreamers/article/details/8220787
+
+同余定理
+https://baike.baidu.com/item/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86/1212360?fr=aladdin
+
+同余运算及其基本性质
+http://www.matrix67.com/blog/archives/236
